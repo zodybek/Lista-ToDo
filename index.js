@@ -9,6 +9,10 @@ const itemsArray = [
     {
         value: "second item (existing)",
         id: 2
+    },
+    {
+        value: "third item (existing)",
+        id: 3
     }
 ]
 
@@ -26,15 +30,18 @@ const removeItem = (itemId) => {
 
 //generuje HTMLa na podstawie bieżącego stanu items
 const renderItems = () => {
-        ul.textContent = "";
+        ul.innerHTML = "";
         itemsArray.forEach((item) => {
             const listItem = document.createElement('li');
             const textNode = document.createTextNode(item.value);
             const deleteButton = document.createElement("button");
-            deleteButton.innerHTML = 'Usuń';
+            deleteButton.textContent = 'Usuń';
+            deleteButton.setAttribute('data-item-id', item.id);
+            deleteButton.addEventListener('click', (event) => {
+                handleRemoveButton(event.target.dataset.itemId);
+            });
             listItem.append(textNode, deleteButton);
             ul.appendChild(listItem);
-            deleteButton.addEventListener('click', handleRemoveButton);
         })  
 }
 
@@ -55,4 +62,5 @@ const handleAddButton = () => {
     input.value = "";     
 }
 
+renderItems();
 addButton.addEventListener('click', handleAddButton)
