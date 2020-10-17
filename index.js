@@ -1,7 +1,7 @@
 const ul = document.querySelector('[data-list]');
 const input = document.querySelector('[data-input]');
 const addButton = document.querySelector('[data-addButton]');
-const itemsArray = [
+let itemsArray = [
     {
         value: "first item (existing)",
         id: 1
@@ -17,15 +17,19 @@ const itemsArray = [
 ]
 
 //pobiera id z data-item-id, wywołuje removeItem i renderItems
-const handleRemoveButton = (e) => {
-    e.target.parentNode.remove();
-    removeItem();
+const handleRemoveButton = (itemId) => {
+    removeItem(itemId);
+    renderItems();
+    console.log(itemsArray);
 }
 
 //usuwa item o konkretnym id z items
 const removeItem = (itemId) => {
-    itemsArray.pop(itemId);
-    console.log(itemsArray);
+    itemsArray = itemsArray.filter((item) => {
+        console.log(itemId);
+        console.log(item.id);
+        return itemId != item.id;
+    } )
 }
 
 //generuje HTMLa na podstawie bieżącego stanu items
