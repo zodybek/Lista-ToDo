@@ -20,7 +20,6 @@ let itemsArray = [
 const handleRemoveButton = (itemId) => {
     removeItem(itemId);
     renderItems();
-    console.log(itemsArray);
 }
 
 //usuwa item o konkretnym id z items
@@ -51,16 +50,16 @@ const renderItems = () => {
 
 //dodaje nowy obiekt item do arraya items
 const addItem = () => {
-    if (input.value === '') return;
     let item = {
         value: input.value,
-        id: itemsArray.length+1,
+        id: Date.now(),
     }
     itemsArray.push(item);
 }
 
 //pobiera value z inputa, wywołuje addItem i renderItems
 const handleAddButton = () => {
+    if (input.value === '') return;
     addItem();
     renderItems();
     input.value = "";     
